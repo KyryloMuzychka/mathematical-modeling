@@ -1,0 +1,112 @@
+4
+1 1 1 -1 2
+1 -1 -1 1 0
+2 1 -1 2 9
+3 1 2 -1 7
+
+1 2 3 4
+
+
+
+3
+3 -2 4 12
+3 4 -2 6
+2 -1 -1 9
+
+3.6 -1.4 -0.4
+
+
+3
+1 2 3 1
+2 -1 2 6
+1 1 5 -1
+
+4 0 -1
+
+
+
+import numpy as np
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        for element in row:
+            print(element, end="\t")
+        print()
+
+
+def get_matrix():
+    n = int(input())
+    matrix = []
+    for row in range(n):
+        row_matrix = list(map(float, input().split()))
+        matrix.append(row_matrix)
+    return np.array(matrix)
+
+
+def first_row(matrix, iteration):
+    for j in range(iteration, len(matrix) + 1):
+        matrix[iteration][j] /= matrix[iteration][iteration]
+    return matrix[iteration]
+
+
+def gauss_jordan(matrix):
+    n = len(matrix)
+    for iteration in range(n):
+
+        lead_row = matrix[iteration]
+        lead_element = lead_row[iteration]
+
+        for i in range(n+1):
+            lead_row[i] /= lead_element
+
+        for i in range(n):
+            if i != iteration:
+                k = matrix[i][iteration] / matrix[iteration][iteration]
+                for j in range(iteration, n+1):
+                    matrix[i][j] = matrix[i][j] - k * lead_row[j]
+                    if matrix[i][iteration] == 0:
+                        print("0SSS")
+
+
+        print(matrix)
+
+
+
+        # for i in range(len(matrix)):
+        #     k = matrix[iteration][i]
+        #     if i != iteration:
+        #         for j in range(iteration, len(matrix) + 1):
+        #             matrix[i][j] = matrix[i][j] - k * row[j]
+    return matrix
+
+
+# def gauss_jordan(matrix):
+#     n = len(matrix)
+#
+#     for i in range(n):
+#         # Находим ведущий элемент
+#         lead_row = matrix[i]
+#         leading_element = lead_row[i]
+#
+#         # Преобразуем текущую строку, чтобы ведущий элемент стал равным 1
+#         for j in range(i, n + 1):
+#             lead_row[j] /= leading_element
+#
+#         # Преобразуем остальные строки
+#         for j in range(n):
+#             if j != i:
+#                 coef = matrix[j][i]
+#                 for k in range(i, n + 1):
+#                     matrix[j][k] -= coef * lead_row[k]
+#     return matrix
+
+
+def main():
+    matrix = get_matrix()
+    m = gauss_jordan(matrix)
+    print(m)
+
+
+if __name__ == "__main__":
+    main()
