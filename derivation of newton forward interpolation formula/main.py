@@ -76,7 +76,7 @@ def main():
     
     
     print(Fore.GREEN, "Похідна другого порядку:\n", dderivative_poly)
-    print(Fore.BLUE, "Похідна першого порядку в точці x = " + str(xx) + ": " + str(round(second_derivative, 4)) + Fore.RESET)       
+    print(Fore.BLUE, "Похідна другого порядку в точці x = " + str(xx) + ": " + str(round(second_derivative, 4)) + Fore.RESET)       
 
 
 if __name__ == "__main__":
